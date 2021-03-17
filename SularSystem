@@ -1,0 +1,40 @@
+import graphics as gr
+
+
+#Global variable
+
+SIZE_X = 800
+SIZE_Y = 800
+
+velocity = gr.Point(2, 0)
+
+def draw_cirle(name_circle, coords_centr, size, color):
+    name_circle = gr.Circle(coords_centr, size)
+    name_circle.setFill(color)
+    name_circle.draw(window)
+    return name_circle
+
+# Function move ball and return new coords
+def move_ball(moving_balls):
+    moving_balls.move(1, 1)
+# Функция проверки координат и изменения направления 
+def check_coords(coords,velocity):
+    pass
+    
+
+
+# Creation window form
+window = gr.GraphWin("Sular system", SIZE_X, SIZE_Y)
+
+#main
+sun = draw_cirle('sun', gr.Point(400, 400), 30, 'yellow')
+ball_1 = draw_cirle('ball_1', gr.Point(300, 200), 20, 'red')
+
+
+while not True:
+    move_ball(ball_1)
+    gr.time.sleep(0.02)
+   
+
+window.getMouse()
+window.close()
