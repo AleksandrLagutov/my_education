@@ -25,9 +25,12 @@ def check_coords(coords,velocity):
     if coords.y < 0 or coords.y > SIZE_Y:
         velocity.y = -velocity.y
 # Функция изменения скорости
-def update_velocity():
+def update_velocity(speed, acceleration):
+    speed.x +=  acceleration.x
+    speed.y +=  acceleration.y
+    return speed
 
-    pass
+    
 
 
     
@@ -37,6 +40,7 @@ def update_velocity():
 window = gr.GraphWin("Sular system", SIZE_X, SIZE_Y)
 
 #main
+acceleration = gr.Point(0, 0.1)
 velocity = gr.Point(2, 3)
 ball_coords = gr.Point(300, 200)
 
@@ -46,6 +50,7 @@ ball_1 = draw_cirle('ball_1', ball_coords , 20, 'red')
 
 while  True:
     move_ball(ball_1, velocity)
+    update_velocity(velocity, acceleration)
     check_coords(ball_1.getCenter(), velocity)
     gr.time.sleep(0.02)
    
