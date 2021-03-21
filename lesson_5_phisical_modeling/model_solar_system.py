@@ -1,6 +1,5 @@
 import graphics as gr
 
-
 #Global variable
 
 SIZE_X = 1000
