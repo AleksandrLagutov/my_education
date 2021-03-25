@@ -1,7 +1,7 @@
 amount_students = int(input())  #Количество студентов
 array_students = [0]*amount_students  # Список результатов студентов
 amount_result_test = [0]*amount_students # Список количества тестов пройденных каждым студентом
-input_data = input()
+
 
 
 
@@ -33,20 +33,24 @@ def update_result_students(id, result, amount_result):
     array_students[id] = sorted(old_result, reverse=True)
 
 
-    pass
-
-while input_data != '#':
-    result_of_test = input_data.split()
-    id_student = int(result_of_test[0])
-    amount_result_test[id_student] += 1
-    update_result_students(id_student, int(result_of_test[1]), int(amount_result_test[id_student]))
-
-    print(array_students)
-
-
-
+if amount_students < 1000:
     input_data = input()
-sorted_array_students = sorted(array_students, key=lambda x: sort_on_summ_bals(x), reverse=True)
-print(sorted_array_students)
+    while input_data != '#':
+        result_of_test = input_data.split()
+        id_student = int(result_of_test[0])
+        amount_result_test[id_student] += 1
+        update_result_students(id_student, int(result_of_test[1]), int(amount_result_test[id_student]))
 
+
+
+
+        input_data = input()
+    sorted_array_students = sorted(array_students, key=lambda x: sort_on_summ_bals(x), reverse=True)
+    #print(sorted_array_students)
+    for i in range(amount_students):
+        if type(sorted_array_students[i]) == list:
+            for k in range(len(sorted_array_students[i])):
+                print(sorted_array_students[i][k], sep=' ', end=' ')
+else:
+    print(0)
 
