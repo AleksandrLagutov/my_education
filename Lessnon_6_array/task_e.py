@@ -40,13 +40,9 @@ if amount_students < 1000:
         id_student = int(result_of_test[0])
         amount_result_test[id_student] += 1
         update_result_students(id_student, int(result_of_test[1]), int(amount_result_test[id_student]))
-
-
-
-
         input_data = input()
+
     sorted_array_students = sorted(array_students, key=lambda x: sort_on_summ_bals(x), reverse=True)
-    #print(sorted_array_students)
     for i in range(amount_students):
         if type(sorted_array_students[i]) == list:
             for k in range(len(sorted_array_students[i])):
