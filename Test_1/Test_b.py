@@ -1,25 +1,32 @@
-a = int(input())
-b = int(input())
-c = int(input())
+A = [0]*3
+for i in range(3):
+    A[i] = int(input())
+A = sorted(A, reverse=True)
 
-def check_triangle(a,b,c):
-    if a**2 == b**2 + c**2:
-        return True
 
-def cheсk_right():
-    pass
-def cheсk_acute():
-    pass
-def cheсk_obtuse():
-    pass
-if a < 0 or b < 0 or c < 0:
-    print('impossible')
-elif check_triangle(a, b, c) or check_triangle(b, c, a) or check_triangle(c, b, a):
-    if cheсk_right():
+def checktriangle(mass: list):
+    flag = False
+    for i in range(3):
+        if mass[i] < 0:
+            return False
+    for i in range(3):
+        lock_mass = [0] * 3
+        for k in range(3):
+            lock_mass[k] = mass[k]
+        lock_mass.pop(i)
+        if mass[i] < sum(lock_mass):
+            flag = True
+        else:
+            return False
+    return flag
+
+
+if checktriangle(A):
+    if A[0]**2 == A[1]**2 + A[2]**2:
         print('right')
-    if cheсk_acute():
+    if A[0]**2 < A[1]**2 + A[2]**2:
         print('acute')
-    if cheсk_obtuse():
+    if A[0]**2 > A[1]**2 + A[2]**2:
         print('obtuse')
 else:
     print('impossible')
