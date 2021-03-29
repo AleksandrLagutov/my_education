@@ -10,6 +10,3 @@ while x !=0:
     x = int(input())
 print(max_namber)
 
-
-
-
