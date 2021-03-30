@@ -21,10 +21,4 @@ def draw(len, n):
         draw(len, n - 1)
 
 
-
-
-
-
-
-
 draw(400, 5)
