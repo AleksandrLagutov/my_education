@@ -1,28 +1,30 @@
 import turtle
 
 
-def draw(l, n):
+def draw(len, n):
     """
     Функиця принимает длину и уровень рекурсии
     :return:
     """
     if n == 0:
-        pass
+        turtle.forward(len)
+        return
     else:
-        for i in range(n):
-            turtle.speed(1)
-            turtle.forward(l)
-            turtle.left(60)
-            turtle.forward(l)
-            turtle.right(120)
-            draw(l, i)
-            turtle.forward(l)
-            turtle.left(60)
-            turtle.forward(l)
-            turtle.left(60)
-            draw(l, n - 1)
-
-    pass
+        len //= 3
+        turtle.speed('fastest')
+        draw(len, n - 1)
+        turtle.left(60)
+        draw(len, n - 1)
+        turtle.right(120)
+        draw(len, n - 1)
+        turtle.left(60)
+        draw(len, n - 1)
 
 
-draw(20, 2)
+
+
+
+
+
+
+draw(400, 5)
