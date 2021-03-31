@@ -1,6 +1,6 @@
 import turtle
 
-def draw(len, n, pref=0):
+def draw(len, n, x = 0, y = 0):
     """
     Графическое изображение Контарового множества
     :param len:
@@ -8,18 +8,22 @@ def draw(len, n, pref=0):
     :param pref:
     :return:
     """
+    dist = len/3
     if n == 0:
-        pref = len
-        pass
-
+        turtle.penup()
+        turtle.goto(x, y)
+        turtle.pendown()
+        turtle.forward(len)
+        return
 
     else:
         turtle.penup()
-        turtle.goto((turtle.xcor() + pref), turtle.ycor() )
+        turtle.goto(x, y)
         turtle.pendown()
         turtle.forward(len)
-        turtle.penup()
-        turtle.goto((turtle.xcor()-len),(turtle.ycor()-10))
-        draw(len/3, n-1, pref)
+        draw(dist, n-1, x, y-20)
+        draw(dist, n-1, x + dist*2, y-20)
 
-draw(200, 3)
+
+
+draw(200, 5)
