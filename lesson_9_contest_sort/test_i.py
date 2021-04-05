@@ -39,5 +39,6 @@ for i in range(number):
 
 data_result = sort_input_data(data_input)
 for i in range(number):
-    print(f'{data_result[i][0]:.2f}', end=' ')
-    print(f'{data_result[i][1]:.3f}')
+    print(format(data_result[i][0], '.2f'), end=' ')
+    #print(f'{data_result[i][1]:.3f}')  Выыод через F функцию не проходил тесты. Различия в версиях Python
+    print(format(data_result[i][1], '.3f'))
