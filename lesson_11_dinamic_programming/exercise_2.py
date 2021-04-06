@@ -4,7 +4,7 @@
 
 def numbers_of_ways(N):
     F = [0, 1] + [0]*N
-    for i in range(2 ,N+1):
+    for i in range(2, N+1):
         triple_jump = 1 if i%3 == 0 else 0
         F[i] = F[i-2] + F[i-1] + triple_jump
     return F[N]
