@@ -15,16 +15,24 @@
 
 #N = int(input())
 #data_input = [input() for i in range(N+1)]
+dict = {"a": 1, "b": 2, "c": 3,  "d": 4,
+        "e": 5, "f": 6, "g": 7,  "h": 8
+        }
 input_data = input()
-column, line = int(input_data[0]), int(input_data[1])
+column, line = dict[input_data[0]], int(input_data[1])
 C = [[0]*9 for i in range(9)]
-for i in range(7, -1, -1):
+for i in range(1, 9):
     for j in range(1, 9):
-        if not (abs(line-1-i) == 2 and abs(column-j) == 1 or abs(line-1-i) == 1 and abs(column-j) == 2):
-            C[i][j] = 1 if (i == 7 and j == 1) else C[i+1][j] + C[i][j-1] + C[i+1][j-1]
-        else:
+        if abs(line-i) == 2 and abs(column-j) == 1 or abs(line-i) == 1 and abs(column-j) == 2 or i == line and j == column :
             C[i][j] = 0
-print(C[0][8])
+        elif i == 1 and j == 1:
+            C[i][j] = 1
+        else:
+            C[i][j] = C[i-1][j] + C[i][j-1] + C[i-1][j-1]
+
+
+print(C[8][8])
+
 
 
 
