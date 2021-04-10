@@ -13,9 +13,7 @@
 Одно число — результат.
 """
 
-#N = int(input())
-#data_input = [input() for i in range(N+1)]
-dict = {"a": 1, "b": 2, "c": 3,  "d": 4,
+dict = {"a": 1, "b": 2, "c": 3,  "d": 4,  # пуревод букв удобно реализовать через словарь, ключём будет буква
         "e": 5, "f": 6, "g": 7,  "h": 8
         }
 input_data = input()
@@ -23,7 +21,13 @@ column, line = dict[input_data[0]], int(input_data[1])
 C = [[0]*9 for i in range(9)]
 for i in range(1, 9):
     for j in range(1, 9):
-        if abs(line-i) == 2 and abs(column-j) == 1 or abs(line-i) == 1 and abs(column-j) == 2 or i == line and j == column :
+        """
+        Цикл считает количество путей, если клетка под боем или на ней конь то счётчик путей обнуляется для данной 
+        позиции.
+        """
+        if abs(line-i) == 2 and abs(column-j) == 1\
+                or abs(line-i) == 1 and abs(column-j) == 2 \
+                or i == line and j == column:
             C[i][j] = 0
         elif i == 1 and j == 1:
             C[i][j] = 1
