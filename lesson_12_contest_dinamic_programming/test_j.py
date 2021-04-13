@@ -10,9 +10,25 @@
 
 Формат выходных данных
 Одно число - стоимость набора.
+Алгоритм хорошо описан на Wiki
+"""
+"""
+N = 5
+W = 13
+
+data_input = [[3, 1], [4, 6], [5, 4], [8, 7], [9, 6]]
+
 """
 N = int(input())
 W = int(input())
 data_input = [[int(input()), int(input())] for i in range(N)]
-print(data_input)
+M = [[0]*(W+1) for i in range(N+1)]
+
+for i in range(1, N+1):
+    for j in range(0, W+1):
+        if data_input[i-1][0] > j:
+            M[i][j] = M[i-1][j]
+        else:
+            M[i][j] = max(M[i-1][j], M[i-1][j-data_input[i-1][0]] + data_input[i-1][1])
+print(M[N][W])
 
