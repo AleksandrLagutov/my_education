@@ -37,6 +37,10 @@ def is_empty_stack():
     return False
 
 
+def clear_steck():
+    steck.clear()
+
+
 def main():
     print('Всё круто')
     pass
