@@ -40,6 +40,10 @@ def is_empty_stack():
 def clear_steck():
     steck.clear()
 
+def last_steck():
+    return steck[-1]
+
+
 
 def main():
     print('Всё круто')
