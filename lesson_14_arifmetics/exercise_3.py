@@ -1,8 +1,8 @@
 """
->>> forward_writing('(2−3)*(12−10)+4/2')
+forward_writing('(2−3)*(12−10)+4/2')
 +∗−23−1210/42
->>> bforward_writing('(2−3)*(12−10)+4/2')
-23−1210−*42/+
+>>> bforwaed_writing('(2-3)*(12-10)+4/2')
+'23-1210-*42/+'
 """
 import exercise_1_ariphetics as s
 
@@ -26,7 +26,7 @@ def forward_writing(data):
 
 def bforwaed_writing(data):
     s.clear_steck()
-    priority = {'': 0, '+': 1, '-': 1, '*': 2, '/': 2, '^': 4}
+    priority = {'': 0, '(': 0, '+': 1, '-': 1, '*': 2, '/': 2, '^': 4}
     p_string = []
     for i in data:
         if i not in '(,)+,-,*,/,^':
@@ -42,20 +42,18 @@ def bforwaed_writing(data):
                 else:
                     return "Ошибка скобочной структуры"
             s.pop_steck()
-        else: # Если символ является бинарной операцией , тогда:
+        else:
+            if not s.is_empty_stack() and priority[s.last_steck()] > priority[i]:
+                while not s.is_empty_stack():
+                    p_string.append(s.pop_steck())
+            s.push_steck(i)
+    while not s.is_empty_stack():
+        p_string.append(s.pop_steck())
+    result = ''.join(p_string)
+    return result
 
-                """
-                1) пока на вершине стека префиксная функция…
-… ИЛИ операция на вершине стека приоритетнее o1
-… ИЛИ операция на вершине стека левоассоциативная с приоритетом как у o1
-… выталкиваем верхний элемент стека в выходную строку;
-2) помещаем операцию o1 в стек.
-                
-                """
-   #  Когда входная строка закончилась, выталкиваем все символы из стека в выходную строку. В стеке должны были остаться только символы операций; если это не так, значит в выражении не согласованы скобки.
 def main():
-    if check_brace():
-        pass
+    print(bforwaed_writing('(2-3)*(12-10)+4/2'))
 
-if __name__ == 'main':
+if __name__ == '__main__':
     main()
