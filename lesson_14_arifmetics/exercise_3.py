@@ -65,7 +65,7 @@ def bforwaed_writing(data):
                     return "Ошибка скобочной структуры"
             s.pop_steck()
         else:
-            if not s.is_empty_stack() and priority[s.last_steck()] > priority[i]:
+            if not s.is_empty_stack() and priority[s.last_steck()] >= priority[i]:
                 while not s.is_empty_stack():
                     p_string.append(s.pop_steck())
             s.push_steck(i)
