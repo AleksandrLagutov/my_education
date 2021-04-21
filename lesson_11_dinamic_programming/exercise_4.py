@@ -14,6 +14,7 @@ def calculate_min_cost(n, price:list):
         C[i] = price[i] + min(C[i-2], C[i-1])
         cost = i - 1 if C[i - 1] < C[i - 2] else i - 2
         prev.append(cost)
+    print(prev)
     return C
 
 def trajectory_restoration(C:list, price:list):
