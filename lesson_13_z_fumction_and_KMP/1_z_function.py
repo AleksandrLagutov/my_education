@@ -17,7 +17,7 @@ def z_func(s):
                 z[i] += 1
         elif i + z[i] - 1 > r:
             l = i
-            r = i = i + z[i] - 1
+            r = i + z[i] - 1
     return z
 
 print(z_func('aaaabaa'))
