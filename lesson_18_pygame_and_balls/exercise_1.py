@@ -38,8 +38,12 @@ while True:
         vx = -vx
     if int(y) + 20 >= height or int(y) - 20 <= 0:
         vy = -vy
+    #if ((x + 250)**2 + (y + 250)**2)**0.5 <= 40: # условие пересечения колизий https://en.wikipedia.org/wiki/Elastic_collision
+
+
 
     window.fill((0,0,0))
     pygame.draw.circle(window, (abs(vy),0 , abs(vy)), (int(x), int(y)), 20)
+    pygame.draw.circle(window, (255, 150, 80), (250, 250), 20)
 
     pygame.display.flip()
