@@ -42,21 +42,21 @@ while True:
         vx = -vx
     if int(y) + 20 >= height or int(y) - 20 <= 0:
         vy = -vy
-    if ((x - 250)**2 + (y - 250)**2)**0.5 < 40: # условие пересечения колизий https://en.wikipedia.org/wiki/Elastic_collision
-        dist = ((x - 250)**2 + (y - 250)**2)**0.5
-        n = (250 - x), (250 - y)
-        p1 = n[0]*n[1]/(dist**2)
-        p2 = (n[0]/dist)**2
-        p3 = (n[1]/dist)**2
-        d1 = vy*p1*2 + vx*p2*2
-        d2 = vx*p1*2 + vy*p3*2
-        vx -= d1
-        vy -= d2
-        #sys.exit()
+    for pos in list_of_bals:
+        if ((x - pos[0])**2 + (y - pos[1])**2)**0.5 < 40: # условие пересечения колизий https://en.wikipedia.org/wiki/Elastic_collision
+            dist = ((x - pos[0])**2 + (y - pos[1])**2)**0.5
+            n = (pos[0] - x), (pos[1] - y)
+            p1 = n[0]*n[1]/(dist**2)
+            p2 = (n[0]/dist)**2
+            p3 = (n[1]/dist)**2
+            d1 = vy*p1*2 + vx*p2*2
+            d2 = vx*p1*2 + vy*p3*2
+            vx -= d1
+            vy -= d2
+            #sys.exit()
     window.fill((0,0,0))
     for pos in list_of_bals:
         pygame.draw.circle(window, (225, 150, 200), pos, 20)
     pygame.draw.circle(window, (abs(vy)+100,0 , abs(vx)+100), (int(x), int(y)), 20)
-    pygame.draw.circle(window, (255, 150, 80), (250, 250), 20)
 
     pygame.display.flip()
