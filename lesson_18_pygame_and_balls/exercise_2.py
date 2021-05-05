@@ -3,10 +3,12 @@
 """
 import pygame
 import sys
+import random
 
 
 class Balls:
     numbers_of_balls = 0
+
     def __init__(self, position):
         """
         Принимает начальные координаты, и устанавливает начальную скорость.
@@ -26,20 +28,36 @@ class Balls:
 
     def colors(self):
         return self.col
-    def size(self):
-        return self.siz
-
-class Moving:
-    pass
 
 
-class Collision:
-    pass
+    def render(self):
+        return pygame.draw.circle(window, self.col, (self.coords()), self.siz)
+
+    def update(self):
+        self.x += self.vx * dt
+        self.y += self.vy * dt
+        if int(self.x) + self.siz >= width or int(self.x) - self.siz <= 0:
+            self.vx = - self.vx
+        if int(self.y) + self.siz >= height or int(self.y) - self.siz <= 0:
+            self.vy = - self.vy
+    def collision(self, this_ball):
+        index = list_of_balls.index(this_ball)
+        for pos in list_of_balls[index:]:
+            if ((this_ball.x - pos.x) ** 2 + (this_ball.y - pos.y) ** 2) ** 0.5 < 40 and pos.x != this_ball.x and pos.y != this_ball.y:
+                dist = ((this_ball.x - pos.x) ** 2 + (this_ball.y - pos.y) ** 2) ** 0.5
+                n = (pos.x - this_ball.x), (pos.y - this_ball.y)
+                p1 = n[0] * n[1] / (dist ** 2)
+                p2 = (n[0] / dist) ** 2
+                p3 = (n[1] / dist) ** 2
+                d1 = this_ball.vy * p1 + this_ball.vx * p2 - pos.vx * p1 - pos.vy * p2
+                d2 = this_ball.vx * p1 + this_ball.vy * p3 - pos.vx * p1 - pos.vy * p3
+                this_ball.vx -= d1
+                this_ball.vy -= d2
+                pos.vx += d1
+                pos.vy += d2
 
 
-class Draw:
 
-    pass
 
 # Инициализация pygame и отрисовка первоначального экрана
 pygame.init()
@@ -50,6 +68,7 @@ pygame.display.set_caption("Balls")
 clock = pygame.time.Clock()
 
 list_of_balls = []
+hands_balls = None
 # основной цикл программы
 while True:
     dt = clock.tick(50) / 1000
@@ -57,17 +76,37 @@ while True:
         if event.type == pygame.QUIT:
             sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
+
             if event.button == 1:
-                list_of_balls.append(Balls(event.pos))
+                flag = True
+                for _ in list_of_balls:
+                    if ((event.pos[0] - _.x)**2 + (event.pos[1] - _.y)**2 > _.siz**2):
+                        flag = True
+                    else:
+                        hands_balls = _
+                        _.col = random.randint(1, 255), random.randint(1, 255), random.randint(1, 255)
+                        flag = False
+                        break
+                if flag:
+                    list_of_balls.append(Balls(event.pos))
+    if hands_balls != None:
+        if pygame.key.get_pressed()[pygame.K_DOWN]:
+            hands_balls.vy += 1
+        if pygame.key.get_pressed()[pygame.K_UP]:
+            hands_balls.vy -= 1
+        if pygame.key.get_pressed()[pygame.K_RIGHT]:
+            hands_balls.vx += 1
+        if pygame.key.get_pressed()[pygame.K_LEFT]:
+            hands_balls.vx -= 1
+
+
 
     window.fill((0, 0, 0))
     for _ in list_of_balls:
-        _.x += _.vx*dt
-        _.y += _.vy*dt
-        if int(_.x) + 20 >= width or int(_.x) - 20 <= 0:
-            _.vx = - _.vx
-        if int(_.y) + 20 >= height or int(_.y) - 20 <= 0:
-            _.vy = - _.vy
-        pygame.draw.circle(window, (_.colors()), (_.coords()), _.size())
+        _.update()
+        _.collision(_)
+        _.render()
+
+
 
     pygame.display.flip()
