@@ -11,5 +11,3 @@ while url[0] != 'W':
     url = list_of_txt.splitlines()[0]
     print(url)
 print(list_of_txt)
-for line in list_of_txt:
-    print(line)
